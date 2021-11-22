@@ -19,7 +19,7 @@ public class LSystemCrack : MonoBehaviour
 
     public float _propergationAngleMax = 50f;
 
-    public float TerminationChance = 0.25f;
+    public float TerminationChance = 0.1f;
 
     public Transform _myScale;
 
@@ -34,14 +34,10 @@ public class LSystemCrack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      /*  _mMesh = gameObject.GetComponentInChildren<MeshFilter>().mesh;
+        /*  _mMesh = gameObject.GetComponentInChildren<MeshFilter>().mesh;
 
-        _mMeshRenderer = this.GetComponent<MeshRenderer>();
-        vertices = _mMesh.vertices;*/
-
-
-
-      
+          _mMeshRenderer = this.GetComponent<MeshRenderer>();
+          vertices = _mMesh.vertices;*/
 
     }
 
@@ -54,7 +50,7 @@ protected void Propergate()
         if ((roll < TerminationChance * Level))
         {
 
-            Debug.Log("Leaf branch");
+            
         }
 
         else
@@ -62,7 +58,7 @@ protected void Propergate()
             float extraAngle = (100 * roll) % (5*(Level+1));
 
 
-            float angleProp = 45f; //+ extraAngle;
+            float angleProp = 45;
             //spawns new branches at equal opposing angles
             spawnBranch(angleProp);
             spawnBranch(-angleProp);
@@ -97,48 +93,4 @@ protected void Propergate()
     {
 
     }
-
-
-    private void Resize(float xScale)
-    {
-
-
-
-    }
-
-    //This should be called before the resumption of the CrackGenerator Coroutine
-
-    private void OnTriggerEnter(Collider other)
-
-    {
-        LSystemCrack otherCrack;
-        other.gameObject.TryGetComponent<LSystemCrack>(out otherCrack);
-
-        if (_canBeResized)
-        {
-            if (otherCrack == true)
-            {
-                otherCrack._canBeResized = false;
-
-                //find the nearest point on the line to the propergation point(end of the line)
-                Vector3 closestPoint = other.ClosestPoint(propergatePoint.position);
-
-                //find distance between this and the propergation point
-                float distance = (closestPoint - propergatePoint.position).magnitude;
-
-                //Find the percentage of length between the origin of the crack and the PropergatePoint
-                //and the origin and the closestpoint
-                float percDiff = distance / length;
-
-
-                //change the value of the local x-scale such that the crack ends where it meets the collided crack
-                _myScale.localScale.Set(1 - percDiff, 1f, 1f);
-
-            }
-
-        }
-    }
-
-
-
 }

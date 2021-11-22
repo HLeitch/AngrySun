@@ -9,7 +9,7 @@ public enum TerrainType
     Ground,
     Road,
     Blank,
-    Slope=9
+    Slope = 9
 }
 /// <summary>
 /// Make sure all tiles are positioned correctly. Roads go left to right from front
@@ -20,7 +20,7 @@ public class TerrainGeneration : MonoBehaviour
     public int gridResolution = 8;
 
     private int _transitionDistance = 2;
-    
+
 
     public GameObject Terrain_Flat;
     public GameObject Terrain_Road;
@@ -41,7 +41,7 @@ public class TerrainGeneration : MonoBehaviour
 
 
 
-  
+
     void Start()
     {
         _CreateTerrain();
@@ -71,7 +71,7 @@ public class TerrainGeneration : MonoBehaviour
 
 
 
-       //Set all terrain sections to base level (ground)
+        //Set all terrain sections to base level (ground)
         int _counterX = 0;
         int _counterY = 0;
         while (_counterX < gridResolution)
@@ -86,8 +86,8 @@ public class TerrainGeneration : MonoBehaviour
             _counterY = 0;
         }
     }
-  //Output a 9 int array. //TODO: overload with int
-  //MOVE TO SEPERATE FILE
+    //Output a 9 int array. //TODO: overload with int
+    //MOVE TO SEPERATE FILE
     public int[] GetSeed()
     {
         int[] _lseed;
@@ -112,10 +112,10 @@ public class TerrainGeneration : MonoBehaviour
 
         //Prevent edges from spawning main road
         int firstX = (int)Mathf.PingPong((float)_lseed[0], (float)gridResolution - 8);
-        firstX += gridResolution/3;
+        firstX += gridResolution / 3;
 
         int firstZ = (int)Mathf.PingPong((float)_lseed[1], (float)gridResolution - 8);
-        firstZ += gridResolution/3;
+        firstZ += gridResolution / 3;
 
         _TerrainTypeArray[firstX, firstZ] = TerrainType.Road;
 
@@ -138,7 +138,7 @@ public class TerrainGeneration : MonoBehaviour
         //Distribute Junctions
         DistributeJunctions(_lseed, firstX, firstZ, horizontal);
 
-       
+
     }
     //Place additional road points above or beside the main road. DistributeRoads called within this function
     private void DistributeJunctions(int[] _lseed, int firstX, int firstZ, bool horizontal)
@@ -192,10 +192,10 @@ public class TerrainGeneration : MonoBehaviour
         //if the current chunk is a road and next to a road
         if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Road)
         {
-            if (CountTilesOfSurroundingType(TerrainType.Road, _counterX, _counterZ)==1)
+            if (CountTilesOfSurroundingType(TerrainType.Road, _counterX, _counterZ) == 1)
             {
 
-                //returns the chunk opposte the chunk with the type of "Road"
+                //returns the chunk opposite the chunk with the type of "Road"
                 int[] nextRoadPlacement = _LocationOfTerrainTypeNextTo(TerrainType.Road, _counterX, _counterZ, true);
 
                 if (_TerrainTypeArray[nextRoadPlacement[0], nextRoadPlacement[1]] != TerrainType.Road)
@@ -207,8 +207,8 @@ public class TerrainGeneration : MonoBehaviour
             if (CountTilesOfSurroundingType(TerrainType.Road, _counterX, _counterZ) == 3)
             {
                 //Turns some junctions into a cross junction
-                if(((_counterX+_counterZ)%3) == 0) { CreateCrossJunction(_counterX, _counterZ); }
-               
+                if (((_counterX + _counterZ) % 3) == 0) { CreateCrossJunction(_counterX, _counterZ); }
+
             }
 
         }
@@ -223,7 +223,7 @@ public class TerrainGeneration : MonoBehaviour
     }
 
     private void _DistributeBuldingTerrain()
-    {   
+    {
         int _counterX = 0;
         int _counterZ = 0;
 
@@ -232,9 +232,9 @@ public class TerrainGeneration : MonoBehaviour
             while (_counterZ < gridResolution)
             {
 
-                if(_TerrainTypeArray[_counterX,_counterZ] == TerrainType.Ground)
+                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground)
                 {
-                    if(_NextToTerrainType(TerrainType.Road,_counterX, _counterZ))
+                    if (_NextToTerrainType(TerrainType.Road, _counterX, _counterZ))
                     {
                         _TerrainTypeArray[_counterX, _counterZ] = TerrainType.Building;
                     }
@@ -249,7 +249,7 @@ public class TerrainGeneration : MonoBehaviour
             _counterX++;
             _counterZ = 0;
         }
-    
+
     }
 
     /// <summary>
@@ -280,11 +280,7 @@ public class TerrainGeneration : MonoBehaviour
                             continue;
                         }
                     }
-
                 }
-
-
-
             }
         }
         return false;
@@ -345,44 +341,22 @@ public class TerrainGeneration : MonoBehaviour
             }
         }
         //if there are none of desired type around
-        int[] defaultRet = {xLoc, zLoc};
+        int[] defaultRet = { xLoc, zLoc };
         return defaultRet;
     }
 
     private int[] RelativeLocationOfTerrainTypeNextTo(TerrainType _tType, int xLoc, int zLoc)
     {
-        foreach (int xoffset in new int[] { -1, 0, 1 })
-        {
-            foreach (int zoffset in new int[] { -1, 0, 1 })
-            {
-                //only directly next to analysed chunk (not diagonal or self)
-                if (xoffset == 0 ^ zoffset == 0)
-                {
-                    //Cannot anlayse chunks which do not exist
-                    if (_chunkIsValid(xLoc + xoffset, zLoc + zoffset))
-                    {
-                        if (_TerrainTypeArray[xLoc + xoffset, zLoc + zoffset] == _tType)
-                        {
-                                int[] ret = { xoffset, zoffset };
-                                return ret;
-                            
-                        }
-                        //if terrain is not equal to desired type
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                }
-            }
-        }
-        //if there are none of desired type around
-        int[] defaultRet = { 0,0};
-        return defaultRet;
+        int[] relativePosition = _LocationOfTerrainTypeNextTo(TerrainType.Road, xLoc, zLoc);
+
+        //subtract analysed location from the location of desired terrain type to find relative location
+        relativePosition[0] -= xLoc;
+        relativePosition[1] -= zLoc;
+        return relativePosition;
     }
 
 
-    //Returns the number of tiles directly next to specifed tile that are of type _tType
+    //Returns the number of tiles DIRECTLY next to specifed tile that are of type _tType
     public int CountTilesOfSurroundingType(TerrainType _tType, int xLoc, int zLoc)
     {
         int countFound = 0;
@@ -394,7 +368,7 @@ public class TerrainGeneration : MonoBehaviour
                 //only directly next to analysed chunk (not diagonal or self)
                 if (xoffset == 0 ^ zoffset == 0)
                 {
-                    if (_chunkIsValid(xLoc + xoffset, zLoc + zoffset ) && _TerrainTypeArray[xLoc + xoffset, zLoc + zoffset] == _tType)
+                    if (_chunkIsValid(xLoc + xoffset, zLoc + zoffset) && _TerrainTypeArray[xLoc + xoffset, zLoc + zoffset] == _tType)
                     {
                         countFound++;
 
@@ -413,9 +387,9 @@ public class TerrainGeneration : MonoBehaviour
     /// <returns></returns>
     private bool _chunkIsValid(int xpos, int zpos)
     {
-        if(xpos >= 0 && xpos < gridResolution)
+        if (xpos >= 0 && xpos < gridResolution)
         {
-            if(zpos >= 0 && zpos < gridResolution)
+            if (zpos >= 0 && zpos < gridResolution)
             {
                 return true;
             }
@@ -425,6 +399,11 @@ public class TerrainGeneration : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Pushes a debug statement with grid showing terrain type of each tile
+    /// </summary>
+    /// <param name="TerrArray"></param>
+    /// <returns></returns>
     private string _TESTTerrainType(TerrainType[,] TerrArray)
     {
         string returnString = "";
@@ -463,15 +442,13 @@ public class TerrainGeneration : MonoBehaviour
                 //Set location of terrain piece
                 Vector3 origin = this.transform.position;
 
-                Vector3 loc =  origin + new Vector3(unitSize.x * _counterX, 0, unitSize.x * _counterZ);
+                Vector3 loc = origin + new Vector3(unitSize.x * _counterX, 0, unitSize.x * _counterZ);
 
                 //Change height based on type of terrain
-                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0),this.transform); }
-                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Road) 
-                {
-                    Vector3 rotation = FindRoadRotation(_counterX,_counterZ);
-                    Instantiate(Terrain_Road, loc, Quaternion.Euler(0,rotation.y,0),this.transform); }
-                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Building) { Instantiate(Terrain_Building, loc, Quaternion.Euler(0, 0, 0),this.transform); }
+                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0), this.transform); }
+                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Road)
+                { RoadTileInstancing(_counterX, _counterZ, loc); }
+                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Building) { Instantiate(Terrain_Building, loc, Quaternion.Euler(0, 0, 0), this.transform); }
                 else
                 {
                     Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0));
@@ -488,15 +465,58 @@ public class TerrainGeneration : MonoBehaviour
 
     }
 
-    private Vector3 FindRoadRotation(int xLoc,int zLoc)
+    private void RoadTileInstancing(int _counterX, int _counterZ, Vector3 loc)
+    {
+        int surroundingRoadCount = CountTilesOfSurroundingType(TerrainType.Road, _counterX, _counterZ);
+
+        if (surroundingRoadCount == 2 || surroundingRoadCount == 1)
+        {
+            //rotate the road based on surrounding pieces
+            Vector3 rotation = FindRoadRotation(_counterX, _counterZ);
+            Instantiate(Terrain_Road, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
+        }
+        else if (surroundingRoadCount == 3)
+        {
+            Vector3 rotation = FindRoadRotation(_counterX, _counterZ);
+            Instantiate(Terrain_Road_T_Junction, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
+        }
+        else if (surroundingRoadCount == 4)
+        {
+            Instantiate(Terrain_Road_Cross, loc, Quaternion.Euler(0, 0, 0), this.transform);
+        }
+    }
+
+    private Vector4 _T_Junction_Rotation(int xloc, int zloc)
+    {
+
+        //Determines which of the surrounding tiles is not a road and rotates T-junction accordingly
+     if(_TerrainTypeArray[xloc-1,zloc] != TerrainType.Road)
+        {
+            return (new Vector4(0, 90, 0));
+        }
+     if(_TerrainTypeArray[xloc + 1, zloc] != TerrainType.Road)
+        {
+            return (new Vector4(0, -90, 0));
+        }
+        if(_TerrainTypeArray[xloc, zloc - 1] != TerrainType.Road)
+        {
+            return (new Vector4(0, 0, 0));
+        }
+        if (_TerrainTypeArray[xloc, zloc + 1] != TerrainType.Road)
+        {
+            return (new Vector4(0, 180, 0));
+        }
+
+        return new Vector4(0, 0, 0, 0);
+    }
+
+    private Vector3 FindRoadRotation(int xLoc, int zLoc)
     {
         //Find count of road tiles around
         int countOfRoadTiles = CountTilesOfSurroundingType(TerrainType.Road, xLoc, zLoc);
-        
 
-        //ifs buts and coconuts
-        //count == 2
-        if (countOfRoadTiles ==2||countOfRoadTiles == 1)
+        //if the road is part of a straight
+        if (countOfRoadTiles == 2 || countOfRoadTiles == 1)
         {
             //Tile is above/below 
             int[] relPos = RelativeLocationOfTerrainTypeNextTo(TerrainType.Road, xLoc, zLoc);
@@ -511,33 +531,15 @@ public class TerrainGeneration : MonoBehaviour
                 return new Vector4(0, 90, 0, 0);
             }
         }
+        if (countOfRoadTiles == 3)
+        {
+           return( _T_Junction_Rotation(xLoc, zLoc));
+
+        }
         else
         {
             return new Vector4(0, 0, 0, 0);
         }
-
-        //if above or below, rotate by .25 on y euler rotation
-
-      
-    }
-
-    private void _PlaceSlopes(int x, int z)
-    {
-
-        //Loops around current position
-        foreach(int xoffset in new int[] { -1, 0, 1 })
-        {
-            foreach (int zoffset in new int[] { -1, 0, 1 })
-            {
-                int[] analysedLocation = new int[]{ x + xoffset, z + zoffset};
-
-
-
-
-
-            }
-        }
-
     }
 
 }
