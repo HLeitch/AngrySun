@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8699375998676432052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4041433111187009724}
+  - component: {fileID: 5606490613625737901}
+  m_Layer: 0
+  m_Name: TerrainGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4041433111187009724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699375998676432052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 148.24634, y: -79.086624, z: 88.232155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5606490613625737901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699375998676432052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23985776faacaa4408450ff6a39e8b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  gridResolution: 10
+  Terrain_Flat: {fileID: 113358600041733900, guid: 383ee9e74a9d4aa488b851720026fb5b,
+    type: 3}
+  Terrain_Road: {fileID: 5230768098498207027, guid: 302659c0a1ab0e14c88774bab65ae60b,
+    type: 3}
+  Terrain_Road_T_Junction: {fileID: 214151015964533377, guid: 2294a0b0799e3a64792be87744b31d33,
+    type: 3}
+  Terrain_Road_Cross: {fileID: 4706764496490612155, guid: cb0018f21b86b214b8c1578e15df1a8b,
+    type: 3}
+  Terrain_Building: {fileID: 8039681474751871870, guid: 25f94bc6755596145bfd5340197d53f2,
+    type: 3}
+  _gSeed: 090000000400000007000000010000000400000008000000070000000700000009000000

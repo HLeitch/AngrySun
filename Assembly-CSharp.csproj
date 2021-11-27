@@ -64,12 +64,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CrackGenerator.cs" />
-    <Compile Include="Assets\LSystemCrack.cs" />
-    <Compile Include="Assets\Scene_Cracks.cs" />
+    <Compile Include="Assets\BuildingGenerator.cs" />
+    <Compile Include="Assets\BuildingPiece.cs" />
+    <Compile Include="Assets\GeneratorManager.cs" />
+    <Compile Include="Assets\Prefabs\Terrain\HL_Terrain.cs" />
+    <Compile Include="Assets\Prefabs\Terrain\TerrainGeneration.cs" />
+    <Compile Include="Assets\Scripts\CrackGenerator.cs" />
+    <Compile Include="Assets\Scripts\LSystemCrack.cs" />
+    <Compile Include="Assets\Scripts\Scene_Cracks.cs" />
     <Compile Include="Assets\Scripts\Terrain_Generation.cs" />
-    <Compile Include="Assets\Terrain\HL_Terrain.cs" />
-    <Compile Include="Assets\Terrain\TerrainGeneration.cs" />
     <None Include="Assets\Materials\Ground_Cracks.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
