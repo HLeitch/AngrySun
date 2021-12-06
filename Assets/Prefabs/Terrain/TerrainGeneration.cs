@@ -29,7 +29,8 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject Terrain_Road_Cross;
     public GameObject Terrain_Building;
     private Vector3 TerrainPlaneSize;
-
+    
+    [SerializeField]
     private TerrainType[,] _TerrainTypeArray;
     public Vector3[,] _terrainTileLocations;
 
@@ -86,7 +87,6 @@ public class TerrainGeneration : MonoBehaviour
                 if (_TerrainTypeArray[_counterX, _counterZ] == t)
                 {
                     rots.Add(FindRoadRotation(_counterX, _counterZ));
-
                 }
                 _counterZ++;
             }
@@ -109,10 +109,6 @@ public class TerrainGeneration : MonoBehaviour
     }
     private void Update()
     {
-        foreach (Vector3 v in _terrainTileLocations)
-        {
-            Debug.DrawRay(v, Vector3.up, Color.red);
-        }
     }
 
     private void CreateTerrainArray()
@@ -199,8 +195,8 @@ public class TerrainGeneration : MonoBehaviour
     //Place additional road points above or beside the main road. DistributeRoads called within this function
     private void DistributeJunctions(int[] _lseed, int firstX, int firstZ, bool horizontal)
     {
-        int numberOfJunctions = (_lseed[2] + 3) % 6;
-        numberOfJunctions = Mathf.Clamp(numberOfJunctions, 3, 6);
+        int numberOfJunctions = (_lseed[2] + 3) % 10;
+        numberOfJunctions = Mathf.Clamp(numberOfJunctions, 2, (int)(0.2*gridResolution));
         int counter = 1;
         while (counter <= numberOfJunctions)
         {
@@ -403,7 +399,7 @@ public class TerrainGeneration : MonoBehaviour
 
     private int[] RelativeLocationOfTerrainTypeNextTo(TerrainType _tType, int xLoc, int zLoc)
     {
-        int[] relativePosition = _LocationOfTerrainTypeNextTo(TerrainType.Road, xLoc, zLoc);
+        int[] relativePosition = _LocationOfTerrainTypeNextTo(_tType, xLoc, zLoc);
 
         //subtract analysed location from the location of desired terrain type to find relative location
         relativePosition[0] -= xLoc;
@@ -499,19 +495,22 @@ public class TerrainGeneration : MonoBehaviour
                 Vector3 origin = this.transform.position;
 
                 Vector3 loc = origin + new Vector3(unitSize.x * _counterX, 0, unitSize.x * _counterZ);
-
+                GameObject newTile;
                 //Change height based on type of terrain
-                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0), this.transform); }
+                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { newTile = Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0), this.transform); }
                 else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Road)
-                { RoadTileInstancing(_counterX, _counterZ, loc); }
-                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Building) { Instantiate(Terrain_Building, loc, Quaternion.Euler(0, 0, 0), this.transform); }
+                { newTile = RoadTileInstancing(_counterX, _counterZ, loc); }
+                else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Building) { newTile = Instantiate(Terrain_Building, loc, Quaternion.Euler(0, 0, 0), this.transform); }
                 else
                 {
-                    Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0));
+                    newTile = Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0));
                 }
+                
+                HL_TerrainTile tilecomp = newTile.GetComponent<HL_TerrainTile>();
+                tilecomp.positionX = _counterX;
+                tilecomp.positionZ = _counterZ;
+
                 _counterZ++;
-
-
             }
 
             _counterX++;
@@ -521,26 +520,29 @@ public class TerrainGeneration : MonoBehaviour
 
     }
 
-    private void RoadTileInstancing(int _counterX, int _counterZ, Vector3 loc)
+    private GameObject RoadTileInstancing(int _counterX, int _counterZ, Vector3 loc)
     {
         int surroundingRoadCount = CountTilesOfSurroundingType(TerrainType.Road, _counterX, _counterZ);
 
+        GameObject tile = null;
         if (surroundingRoadCount == 2 || surroundingRoadCount == 1)
         {
             //rotate the road based on surrounding pieces
             Vector3 rotation = FindRoadRotation(_counterX, _counterZ);
-            Instantiate(Terrain_Road, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
+           tile = Instantiate(Terrain_Road, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
         }
         else if (surroundingRoadCount == 3)
         {
             Vector3 rotation = FindRoadRotation(_counterX, _counterZ);
-            Instantiate(Terrain_Road_T_Junction, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
+           tile =  Instantiate(Terrain_Road_T_Junction, loc, Quaternion.Euler(0, rotation.y, 0), this.transform);
         }
         else if (surroundingRoadCount == 4)
         {
-            Instantiate(Terrain_Road_Cross, loc, Quaternion.Euler(0, 0, 0), this.transform);
+            tile = Instantiate(Terrain_Road_Cross, loc, Quaternion.Euler(0, 0, 0), this.transform);
         }
+        return tile;
     }
+
 
     private Vector4 _T_Junction_Rotation(int xloc, int zloc)
     {
@@ -572,7 +574,12 @@ public class TerrainGeneration : MonoBehaviour
     /// <param name="xLoc"></param>
     /// <param name="zLoc"></param>
     /// <returns></returns>
-    private Vector4 FindRoadRotation(int xLoc, int zLoc)
+    /// 
+
+    Vector4[] RotationsToTile = new Vector4[] { new Vector4(0, 0, 0, 0), new Vector4(0, -90, 0, 0), new Vector4(0, 180, 0, 0), new Vector4(0, 90, 0, 0) };
+
+
+    public Vector4 FindRoadRotation(int xLoc, int zLoc)
     {
         //Find count of road tiles around
         int countOfRoadTiles = CountTilesOfSurroundingType(TerrainType.Road, xLoc, zLoc);
@@ -586,22 +593,22 @@ public class TerrainGeneration : MonoBehaviour
             //if the road is in the positive x direction
             if (relPos[0] == 1)
             {
-                return new Vector4(0, 0, 0);
+                return RotationsToTile[0];
             }
             //road in negative x direction
             else if(relPos[0] == -1)
             {
-                return new Vector4(0, 180,0);
+                return RotationsToTile[2];
             }
             //road in positive z direction
             else if(relPos[1] == 1)
             {
-                return new Vector4(0, 90,0);
+                return RotationsToTile[1];
             }
             //road in negative z direction
             else if(relPos[1] == -1)
             {
-                return new Vector4(0, -90,0);
+                return RotationsToTile[3];
             }
             //failure state
             else

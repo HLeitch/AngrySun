@@ -24,11 +24,12 @@ public class BuildingGenerator : MonoBehaviour
     {
         List<Vector3> locs = data.Item1;
         List<Vector4> rots = data.Item2;
-        foreach (Vector3 location in locs)
+        int counter = 0;
+        while (counter < locs.Count)
         {
-            Quaternion rotation = new Quaternion(0,rots[locs.IndexOf(location)].y,0,0);
-            Instantiate(SelectPiece(), location, rotation);
-            Debug.Log($"Building placed at: {location}, rotation {rotation}");
+            GameObject newBuilding = Instantiate(SelectPiece(), locs[counter],Quaternion.identity);
+            newBuilding.transform.Rotate(rots[counter].x, rots[counter].y, rots[counter].z);
+            counter++;
         }
 
     }

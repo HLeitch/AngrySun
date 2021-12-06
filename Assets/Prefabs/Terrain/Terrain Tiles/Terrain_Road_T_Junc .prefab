@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 586554465028170887}
   - component: {fileID: 8480471269518485528}
   - component: {fileID: 4315125492239498800}
+  - component: {fileID: 6919621431934782777}
   m_Layer: 0
   m_Name: 'Terrain_Road_T_Junc '
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214151015964533377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 520.14276, y: 216.14052, z: 371.89862}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5799049464888176196}
   m_Father: {fileID: 0}
@@ -66,6 +67,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70f4107b71f9e4644b654e995ae66848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionX: 999
+  positionZ: 999
+--- !u!114 &6919621431934782777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214151015964533377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fab2bf318e61c41b7940ad88946fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6336817279969872303
