@@ -24,7 +24,13 @@ public class WIndowPositioner : MonoBehaviour
     /// <summary>
     /// returns an approximate normalised direction to the closest mesh. recommended to create int results from -1 -> 1.
     /// </summary>
-    private Vector3 roughDirectionToMesh { get { return (_mMesh.bounds.ClosestPoint(transform.position) - this.transform.position).normalized; } }
+    private Vector3 roughDirectionToMesh { get 
+        {
+            //Vector3 center = new Vector3(_mMesh.bounds.center.x, 0, _mMesh.bounds.center.z);
+            Vector3 center = _mMesh.bounds.ClosestPoint(this.transform.position);
+            Vector3 positionOfPlacer = this.transform.position;
+            return (center - positionOfPlacer); } 
+    }
 
     /// <summary>
     /// Find the distance to the closest point on the mesh renderer
@@ -58,9 +64,10 @@ public class WIndowPositioner : MonoBehaviour
 
             Quaternion rot = Quaternion.LookRotation(pointData.Item2, Vector3.up);
             Vector3 pos = pointData.Item1 + (0.05f * pointData.Item2);
-
+            Vector3 localPos = pos - transform.position;
 
             GameObject newWindow = Instantiate(GetWindow(), pos, rot, this.transform);
+
 
 
         }
@@ -82,6 +89,11 @@ public class WIndowPositioner : MonoBehaviour
         RaycastHit HitInstance = new RaycastHit();
         Vector3 _roughDirectionToMesh = roughDirectionToMesh;
 
+        //increment along z if normal in x and vice versa
+        Vector3 incrementationDirection = transform.TransformDirection(_roughDirectionToMesh.z, 0, _roughDirectionToMesh.x);
+
+
+
         //amount of iterations required to place a window at every desired point. 
         //TODO: ADJUST NUMBER FOR X AND Z SIDES
         int numWindowsInRow = (int) (meshLims.x * 2 / distanceBetweenWindows);
@@ -102,8 +114,8 @@ public class WIndowPositioner : MonoBehaviour
                 Vector3 raycastPos = this.gameObject.transform.position;
 
                 //Raycast to a point on the building. If on x side the z coord will be displaced and vice versa
-                raycastPos.x += (iteration * distanceBetweenWindows*_roughDirectionToMesh.z);
-                raycastPos.z += (iteration * distanceBetweenWindows * _roughDirectionToMesh.x);
+                raycastPos.x += (iteration * distanceBetweenWindows * incrementationDirection.x);
+                raycastPos.z += (iteration * distanceBetweenWindows * incrementationDirection.z);
 
 
                 raycastPos.y += heightOfFloor;
@@ -136,7 +148,13 @@ public class WIndowPositioner : MonoBehaviour
             Gizmos.color = Color.magenta;
 
             Gizmos.DrawSphere(pointData.Item1, 0.2f);
+            
+
         }
+        Gizmos.DrawRay(transform.position, roughDirectionToMesh);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 0.4f);
     }
 
 }
