@@ -64,21 +64,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BuildingDebugger.cs" />
-    <Compile Include="Assets\BuildingGenerator.cs" />
-    <Compile Include="Assets\BuildingPiece.cs" />
-    <Compile Include="Assets\GeneratorManager.cs" />
-    <Compile Include="Assets\Prefabs\Terrain\HL_TerrainTile.cs" />
-    <Compile Include="Assets\Prefabs\Terrain\TerrainGeneration.cs" />
-    <Compile Include="Assets\Raycastingtest.cs" />
-    <Compile Include="Assets\Scripts\CrackGenerator.cs" />
-    <Compile Include="Assets\Scripts\LSystemCrack.cs" />
-    <Compile Include="Assets\Scripts\Scene_Cracks.cs" />
-    <Compile Include="Assets\Scripts\Terrain_Generation.cs" />
-    <Compile Include="Assets\SpherecastTest.cs" />
-    <Compile Include="Assets\TerrainTileDebugger.cs" />
-    <Compile Include="Assets\WIndowPositioner.cs" />
-    <None Include="Assets\Materials\Ground_Cracks.shader" />
+    <Compile Include="Assets\Scripts\Building\BuildingDebugger.cs" />
+    <Compile Include="Assets\Scripts\Building\BuildingGenerator.cs" />
+    <Compile Include="Assets\Scripts\Building\BuildingPiece.cs" />
+    <Compile Include="Assets\Scripts\Building\WIndowPositioner.cs" />
+    <Compile Include="Assets\Scripts\Crack\CrackGenerator.cs" />
+    <Compile Include="Assets\Scripts\Crack\LSystemCrack.cs" />
+    <Compile Include="Assets\Scripts\Crack\Scene_Cracks.cs" />
+    <Compile Include="Assets\Scripts\GeneratorManager.cs" />
+    <Compile Include="Assets\Scripts\Seed.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\BuildingTileInfo.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\HL_TerrainTile.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\TerrainGeneration.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\TerrainTileDebugger.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\TerrainType.cs" />
+    <Compile Include="Assets\Scripts\TerrainGeneration\Terrain_Generation.cs" />
+    <Compile Include="Assets\Scripts\TestingAndExperimenting\Raycastingtest.cs" />
+    <Compile Include="Assets\Scripts\TestingAndExperimenting\SpherecastTest.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -625,6 +627,9 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -648,6 +653,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>

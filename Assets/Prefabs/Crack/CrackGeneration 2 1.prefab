@@ -78707,6 +78707,8 @@ MonoBehaviour:
   startPoint: {fileID: 8841089053777136176}
   _levels: 10
   _mMesh: {fileID: 0}
+  generated: 1
+  deformed: 0
 --- !u!23 &4363893446503355154
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7311569227719111561}
+  - component: {fileID: 1792700609}
   - component: {fileID: 7311569227719111566}
   m_Layer: 0
   m_Name: Generators
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1792700609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7311569227719111560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48fbbd643cb52b24fbb5db30cc27b875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 100000000
 --- !u!114 &7311569227719111566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +73,7 @@ PrefabInstance:
         type: 3}
       propertyPath: buildingPiece
       value: 
-      objectReference: {fileID: 5993588534727268693, guid: 5eb16f32ec8cc2140a5dfb6b585fde4b,
+      objectReference: {fileID: 899224517039285635, guid: 46deb5a8a1eb7dc45ab0581deae36587,
         type: 3}
     - target: {fileID: 8995434614885264361, guid: 0862e64c5c8c1e64bb1e0e464e1b6417,
         type: 3}
@@ -277,6 +291,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5606490613625737901, guid: 26d781a99ba6cbb45bdea75273c87533,
+        type: 3}
+      propertyPath: gridResolution
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8699375998676432052, guid: 26d781a99ba6cbb45bdea75273c87533,
         type: 3}

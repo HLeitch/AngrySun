@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!218 &6468083083828278927
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711488034559579945}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 0}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ScaleInLightmap: 1
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 0
 --- !u!1001 &598149249554991141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,6 +44,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DefaultTerrainPiece_Road Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 113358600041733900, guid: 383ee9e74a9d4aa488b851720026fb5b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 883007322924741676, guid: 383ee9e74a9d4aa488b851720026fb5b,
         type: 3}
@@ -72,11 +110,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3314733010045793203, guid: 383ee9e74a9d4aa488b851720026fb5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8564374850895730069, guid: 383ee9e74a9d4aa488b851720026fb5b,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -462981019419857548, guid: d37edc29717937344997e2534a83ac05,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8453058557579125754, guid: 383ee9e74a9d4aa488b851720026fb5b, type: 3}
+    - {fileID: 68017380528115514, guid: 383ee9e74a9d4aa488b851720026fb5b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 383ee9e74a9d4aa488b851720026fb5b, type: 3}
+--- !u!1 &711488034559579945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 113358600041733900, guid: 383ee9e74a9d4aa488b851720026fb5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 598149249554991141}
+  m_PrefabAsset: {fileID: 0}
