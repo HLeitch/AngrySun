@@ -25,7 +25,7 @@ Material:
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -33,6 +33,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_7BF78F44:
+        m_Texture: {fileID: 2800000, guid: 1109844e559aa254e908a21974adcf22, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -66,12 +70,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - DistortionAmount: 0.784
+    - DistortionAmount: 1.739
     - DistortionMaxValue: 0.112
-    - DistortionMinValue: 1
-    - DistortionMovementRate: -0.069
+    - DistortionMinValue: 0.782
+    - DistortionMovementRate: -0.078
     - DistortionSharpness: 0
-    - Vector1_47F4D427: 2.33
+    - Vector1_47F4D427: 2.62
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -94,7 +98,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - DistortionRatio: {r: 0, g: 0.01, b: 0, a: 0}
+    - DistortionRatio: {r: 0.003, g: 0.008, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

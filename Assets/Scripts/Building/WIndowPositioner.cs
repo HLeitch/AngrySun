@@ -20,6 +20,7 @@ public class WIndowPositioner : MonoBehaviour
     private int numberOfFloors = 5;
 
     public GameObject window;
+    public GameObject brokenWindow;
 
     /// <summary>
     /// Window Positioning will not execute while this is false
@@ -44,9 +45,13 @@ public class WIndowPositioner : MonoBehaviour
 
     private float angleBetweenWindowRays { get{ return Mathf.Atan2(distanceBetweenWindows, distanceToSurface); } }
 
-    private GameObject GetWindow()
+    private GameObject GetWindow((Vector3, Vector3) pointData)
     {
-        return window;
+        if (pointData.Item1.y < Mathf.PerlinNoise(pointData.Item1.x, pointData.Item1.z) * 50)
+        {
+            return brokenWindow;
+        }
+        else { return window; };
     }
   
     // Start is called before the first frame update
@@ -73,7 +78,7 @@ public class WIndowPositioner : MonoBehaviour
                 Vector3 pos = pointData.Item1 + (0.05f * pointData.Item2);
                 Vector3 localPos = pos - transform.position;
 
-                GameObject newWindow = Instantiate(GetWindow(), pos, rot, this.transform);
+                GameObject newWindow = Instantiate(GetWindow(pointData), pos, rot, this.transform);
 
 
 
@@ -106,7 +111,7 @@ public class WIndowPositioner : MonoBehaviour
         //TODO: ADJUST NUMBER FOR X AND Z SIDES
         int numWindowsInRow = (int) (meshLims.x * 2 / distanceBetweenWindows);
 
-        float gapBetweenFloors = meshLims.y*2 / (numberOfFloors + 1);
+        float gapBetweenFloors = meshLims.y*2 / (numberOfFloors );
 
         int floor = 0;
         while (floor < numberOfFloors)
@@ -129,8 +134,6 @@ public class WIndowPositioner : MonoBehaviour
                 raycastPos.y += heightOfFloor;
                 if (Physics.Raycast(raycastPos, directionalDistance, out HitInstance))
                 {
-
-                    Debug.Log("raycast collided");
                     //replace gameObject rotation with normal to surface of mesh
                     Vector3 position = HitInstance.point;
                     Vector3 normalAngle = HitInstance.normal;

@@ -21,7 +21,8 @@ public class CrackGenerator : MonoBehaviour
     void Start()
     {
         //Call Propergation and combines/deforms meshes
-        if (!generated) { StartCoroutine("MassPropergation"); }
+        if (!generated) { StartCoroutine("MassPropergation");
+                          }
 
         //combining/deforming mesh
         else {
@@ -39,9 +40,7 @@ public class CrackGenerator : MonoBehaviour
 
             ///Adding meshes to combined mesh at true positions/rotations.
             Transform meshTransform = meshFilters[i].gameObject.transform;
-            combine[i].transform = Matrix4x4.TRS(meshTransform.position-gameObject.transform.position, meshTransform.rotation, meshTransform.lossyScale);
-            meshFilters[i].gameObject.SetActive(false);
-
+            combine[i].transform = Matrix4x4.TRS(meshTransform.position - gameObject.transform.position, meshTransform.rotation, meshTransform.lossyScale);
             i++;
         }
 
@@ -56,6 +55,11 @@ public class CrackGenerator : MonoBehaviour
         _mMeshRenderer = this.GetComponent<MeshRenderer>();
 
         vertices = _mMesh.vertices;
+
+        foreach (Transform child in this.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     public void CrackDeformation()

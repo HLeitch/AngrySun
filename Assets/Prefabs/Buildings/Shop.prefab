@@ -94,7 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowPositioners: []
+  multiLevelPiece: {fileID: 0}
+  multiLevel: 0
   _mMesh: {fileID: 0}
+  _mMeshRenderer: {fileID: 2574964532274523546}
 --- !u!1001 &8775822644203490003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,6 +220,12 @@ PrefabInstance:
 --- !u!4 &9098191880661331256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b3a0cb322b8a064b96f039d8a2d9596,
+    type: 3}
+  m_PrefabInstance: {fileID: 8775822644203490003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2574964532274523546 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2705008973019879607, guid: 1b3a0cb322b8a064b96f039d8a2d9596,
     type: 3}
   m_PrefabInstance: {fileID: 8775822644203490003}
   m_PrefabAsset: {fileID: 0}

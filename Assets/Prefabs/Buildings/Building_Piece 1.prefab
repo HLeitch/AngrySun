@@ -8641,7 +8641,10 @@ MonoBehaviour:
   - {fileID: 1832687631016218537}
   - {fileID: 2662633986650041507}
   - {fileID: 2794407560722755066}
+  multiLevelPiece: {fileID: 0}
+  multiLevel: 1
   _mMesh: {fileID: 0}
+  _mMeshRenderer: {fileID: 4794356578608813304}
 --- !u!114 &1066895167629849393
 MonoBehaviour:
   m_ObjectHideFlags: 0

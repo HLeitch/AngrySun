@@ -36,7 +36,7 @@ public class TerrainGeneration : MonoBehaviour
 
     void Awake()
     {
-        seedObject = GetComponentInParent<Seed>();
+        seedObject = FindObjectOfType<Seed>();
         _gSeed = seedObject.GetSeed();
     }
 
@@ -56,7 +56,7 @@ public class TerrainGeneration : MonoBehaviour
             while (_counterZ < gridResolution)
             {
 
-                if (_TerrainTypeArray[_counterX, _counterZ] == t)
+                if(_TerrainTypeArray[_counterX,_counterZ] == t)
                 {
                     locs.Add(_terrainTileLocations[_counterX, _counterZ]);
 
@@ -497,6 +497,14 @@ public class TerrainGeneration : MonoBehaviour
         }
 
         return returnString;
+    }
+
+    /// <summary>
+    /// Call a debug statement showing the current state of the terrain array.
+    /// </summary>
+    public string TestTerrainTypeArray()
+    {
+        return this._TESTTerrainType(_TerrainTypeArray);
     }
 
     /// <summary>

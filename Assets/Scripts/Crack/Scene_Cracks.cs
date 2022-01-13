@@ -11,24 +11,37 @@ public class Scene_Cracks : MonoBehaviour
 
 
     private Seed seedObject;
+
     TerrainGeneration tg;
+
     /// <summary>
     /// local version of the seed passed into the level. This is a clone of the seed in the Seed Component
     /// </summary>
     int[] _lseed;
-    GeneratorManager parent;
+
+    GeneratorManager parent = null;
+
+
     void Start()
     {
-
-        parent = GetComponentInParent<GeneratorManager>();
-        seedObject = parent.seedObject;
-        _lseed = seedObject.GetSeed();
+        if (parent is null) { Initialise(); }
 
         // placeCracks();
     }
+
+    /// <summary>
+    /// Can be handled by itself or called by another class
+    /// </summary>
+    public void Initialise()
+    {
+        parent = GetComponentInParent<GeneratorManager>();
+        seedObject = parent.seedObject;
+        _lseed = seedObject.GetSeed();
+    }
+
     public void PlaceCracks()
     {
-        RetreivePositions(4);
+        RetreivePositions(5);
 
         int counter = 0;
         foreach(Vector3 t in Positions)

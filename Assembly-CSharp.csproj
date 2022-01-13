@@ -64,14 +64,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HeatHazeObject.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingDebugger.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingGenerator.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingPiece.cs" />
     <Compile Include="Assets\Scripts\Building\WIndowPositioner.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraOnTrack.cs" />
     <Compile Include="Assets\Scripts\Crack\CrackGenerator.cs" />
     <Compile Include="Assets\Scripts\Crack\LSystemCrack.cs" />
     <Compile Include="Assets\Scripts\Crack\Scene_Cracks.cs" />
     <Compile Include="Assets\Scripts\GeneratorManager.cs" />
+    <Compile Include="Assets\Scripts\SceneAndLights\MainLight.cs" />
     <Compile Include="Assets\Scripts\Seed.cs" />
     <Compile Include="Assets\Scripts\TerrainGeneration\BuildingTileInfo.cs" />
     <Compile Include="Assets\Scripts\TerrainGeneration\HL_TerrainTile.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Assets\Scripts\TerrainGeneration\Terrain_Generation.cs" />
     <Compile Include="Assets\Scripts\TestingAndExperimenting\Raycastingtest.cs" />
     <Compile Include="Assets\Scripts\TestingAndExperimenting\SpherecastTest.cs" />
+    <Compile Include="Assets\ShelterGenerator.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -263,6 +268,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/PackageCache/com.unity.cinemachine@2.8.4/Runtime/ThirdParty/clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -615,6 +623,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
@@ -653,6 +664,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualEffectGraph.Editor">
       <HintPath>C:/Users/harri/OneDrive/Documents/Year 3/My project/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
