@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public class WIndowPositioner : MonoBehaviour
     [SerializeField]
     [Range(0.0f,3.0f)]
     private float distanceBetweenWindows = 2f;
+    [SerializeField]
+    [Range(0,10)]
+    private int numOfWindowsInRow = 3;
     private float gapBetweenFloors { get { return meshLims.y * 2 / numberOfFloors + 1; } }
 
     [SerializeField]
@@ -22,10 +26,16 @@ public class WIndowPositioner : MonoBehaviour
     public GameObject window;
     public GameObject brokenWindow;
 
+    public GameObject parent;
+
     /// <summary>
     /// Window Positioning will not execute while this is false
     /// </summary>
     public bool inUse;
+    [SerializeField]
+    private Vector3 scaleOfWindows;
+    [SerializeField]
+    private bool rotateToFaceMesh;
 
     /// <summary>
     /// returns an approximate normalised direction to the closest mesh. recommended to create int results from -1 -> 1.
@@ -47,7 +57,7 @@ public class WIndowPositioner : MonoBehaviour
 
     private GameObject GetWindow((Vector3, Vector3) pointData)
     {
-        if (pointData.Item1.y < Mathf.PerlinNoise(pointData.Item1.x, pointData.Item1.z) * 50)
+        if (pointData.Item1.y < Mathf.PerlinNoise(pointData.Item1.x, pointData.Item1.z) * 10f)
         {
             return brokenWindow;
         }
@@ -57,6 +67,8 @@ public class WIndowPositioner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parent = GetComponentInParent<GameObject>();
+
         if (_mMesh == null)
         {
             Debug.LogError($"ATTACH MESH TO WINDOWPOSITIONER, {this}");
@@ -71,7 +83,7 @@ public class WIndowPositioner : MonoBehaviour
     {
         if (inUse)
         {
-            foreach ((Vector3, Vector3) pointData in FindWindowPositionsAndNormals())
+            foreach ((Vector3, Vector3) pointData in CalculateWindowPositionsAndNormals())
             {
 
                 Quaternion rot = Quaternion.LookRotation(pointData.Item2, Vector3.up);
@@ -79,6 +91,8 @@ public class WIndowPositioner : MonoBehaviour
                 Vector3 localPos = pos - transform.position;
 
                 GameObject newWindow = Instantiate(GetWindow(pointData), pos, rot, this.transform);
+
+                newWindow.transform.localScale = scaleOfWindows;
 
 
 
@@ -96,22 +110,16 @@ public class WIndowPositioner : MonoBehaviour
     /// Returns a list of tuples. Position of windows (in world space) and the normal rotation of these positions.
     /// </summary>
     /// <returns></returns>
-    private List<(Vector3,Vector3)> FindWindowPositionsAndNormals()
+   
+
+    private List<(Vector3, Vector3)> CalculateWindowPositionsAndNormals()
     {
-        List<(Vector3,Vector3)> positions = new List<(Vector3, Vector3)>();
-        RaycastHit HitInstance = new RaycastHit();
-        Vector3 _roughDirectionToMesh = roughDirectionToMesh;
-
-        //increment along z if normal in x and vice versa
-        Vector3 incrementationDirection = transform.TransformDirection(_roughDirectionToMesh.z, 0, _roughDirectionToMesh.x);
+        List<(Vector3, Vector3)> positions = new List<(Vector3, Vector3)>();
 
 
 
-        //amount of iterations required to place a window at every desired point. 
-        //TODO: ADJUST NUMBER FOR X AND Z SIDES
-        int numWindowsInRow = (int) (meshLims.x * 2 / distanceBetweenWindows);
 
-        float gapBetweenFloors = meshLims.y*2 / (numberOfFloors );
+        float gapBetweenFloors = meshLims.y * 2 / (numberOfFloors);
 
         int floor = 0;
         while (floor < numberOfFloors)
@@ -119,20 +127,13 @@ public class WIndowPositioner : MonoBehaviour
             float heightOfFloor = (0.5f * gapBetweenFloors) + (floor * gapBetweenFloors);
 
             int iteration = 0;
-            while (iteration < numWindowsInRow)
+            RaycastHit HitInstance;
+            while (iteration < numOfWindowsInRow)
             {
-                
-                Vector3 directionalDistance = _roughDirectionToMesh*distanceToSurface;
-
-                Vector3 raycastPos = this.gameObject.transform.position;
-
-                //Raycast to a point on the building. If on x side the z coord will be displaced and vice versa
-                raycastPos.x += (iteration * distanceBetweenWindows * incrementationDirection.x);
-                raycastPos.z += (iteration * distanceBetweenWindows * incrementationDirection.z);
-
-
+                //Shift the window a distance away from the previous
+               Vector3 raycastPos =  transform.position+( transform.right * distanceBetweenWindows*iteration);
                 raycastPos.y += heightOfFloor;
-                if (Physics.Raycast(raycastPos, directionalDistance, out HitInstance))
+                if (Physics.Raycast(raycastPos, transform.forward, out HitInstance))
                 {
                     //replace gameObject rotation with normal to surface of mesh
                     Vector3 position = HitInstance.point;
@@ -145,22 +146,27 @@ public class WIndowPositioner : MonoBehaviour
             floor++;
         }
 
-
-
         return positions;
     }
 
+    private void pointTowardsMesh()
+    {
+        if(rotateToFaceMesh)
+        // Rotate the WindowPositioner to look at the mesh
+        transform.LookAt(_mMesh.bounds.ClosestPoint(transform.position));
 
+    }
 
     private void OnDrawGizmosSelected()
     {
         if (inUse)
         {
-            foreach ((Vector3, Vector3) pointData in FindWindowPositionsAndNormals())
+            foreach ((Vector3, Vector3) pointData in CalculateWindowPositionsAndNormals())
             {
                 Gizmos.color = Color.magenta;
 
                 Gizmos.DrawSphere(pointData.Item1, 0.2f);
+                
 
 
             }

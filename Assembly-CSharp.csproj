@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Crack\CrackGenerator.cs" />
     <Compile Include="Assets\Scripts\Crack\LSystemCrack.cs" />
     <Compile Include="Assets\Scripts\Crack\Scene_Cracks.cs" />
+    <Compile Include="Assets\Scripts\FeaturesModifierArrays.cs" />
+    <Compile Include="Assets\Scripts\FeaturesOnTile.cs" />
     <Compile Include="Assets\Scripts\GeneratorManager.cs" />
     <Compile Include="Assets\Scripts\SceneAndLights\MainLight.cs" />
     <Compile Include="Assets\Scripts\Seed.cs" />
@@ -85,6 +87,8 @@
     <Compile Include="Assets\Scripts\TerrainGeneration\Terrain_Generation.cs" />
     <Compile Include="Assets\Scripts\TestingAndExperimenting\Raycastingtest.cs" />
     <Compile Include="Assets\Scripts\TestingAndExperimenting\SpherecastTest.cs" />
+    <Compile Include="Assets\Scripts\TreeGenerator.cs" />
+    <Compile Include="Assets\Shelter.cs" />
     <Compile Include="Assets\ShelterGenerator.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

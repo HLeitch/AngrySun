@@ -195,11 +195,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: d37edc29717937344997e2534a83ac05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3739237708370644b0bb820591f4521, type: 2}
+    - target: {fileID: -6889427085835381694, guid: d37edc29717937344997e2534a83ac05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3739237708370644b0bb820591f4521, type: 2}
+    - target: {fileID: -6746852840979768278, guid: d37edc29717937344997e2534a83ac05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3739237708370644b0bb820591f4521, type: 2}
+    - target: {fileID: 157822659374709967, guid: d37edc29717937344997e2534a83ac05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3739237708370644b0bb820591f4521, type: 2}
     - target: {fileID: 919132149155446097, guid: d37edc29717937344997e2534a83ac05,
         type: 3}
       propertyPath: m_Name
       value: Road_Tile_Standard
       objectReference: {fileID: 0}
+    - target: {fileID: 4630675689842409204, guid: d37edc29717937344997e2534a83ac05,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3739237708370644b0bb820591f4521, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d37edc29717937344997e2534a83ac05, type: 3}
 --- !u!4 &4324006730812490363 stripped

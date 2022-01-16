@@ -8597,7 +8597,6 @@ GameObject:
   - component: {fileID: 1066895167629849393}
   - component: {fileID: 9011997608441193320}
   - component: {fileID: 3191968942133141741}
-  - component: {fileID: 721043655224739916}
   m_Layer: 0
   m_Name: Building_Piece 1
   m_TagString: Untagged
@@ -8704,17 +8703,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!192 &721043655224739916
-OcclusionArea:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899224517039285635}
-  serializedVersion: 2
-  m_Size: {x: 7.3557625, y: 8.675369, z: 9.253079}
-  m_Center: {x: 0.23242629, y: 3.8376844, z: -0.0051397085}
-  m_IsViewVolume: 1
 --- !u!1 &899660355132817488
 GameObject:
   m_ObjectHideFlags: 0
@@ -17578,6 +17566,7 @@ MonoBehaviour:
   distanceBetweenWindows: 0.72
   numberOfFloors: 8
   window: {fileID: 3989727560628012810, guid: 6515a01f338513b48ba724f310326c4f, type: 3}
+  brokenWindow: {fileID: 0}
   inUse: 0
 --- !u!1 &1841075684602716288
 GameObject:
@@ -24593,6 +24582,7 @@ MonoBehaviour:
   distanceBetweenWindows: 0.72
   numberOfFloors: 8
   window: {fileID: 3989727560628012810, guid: 6515a01f338513b48ba724f310326c4f, type: 3}
+  brokenWindow: {fileID: 0}
   inUse: 0
 --- !u!1 &2672602062854366025
 GameObject:
@@ -25615,6 +25605,7 @@ MonoBehaviour:
   distanceBetweenWindows: 0.72
   numberOfFloors: 8
   window: {fileID: 3989727560628012810, guid: 6515a01f338513b48ba724f310326c4f, type: 3}
+  brokenWindow: {fileID: 0}
   inUse: 0
 --- !u!1 &2795696325089635025
 GameObject:
@@ -57322,13 +57313,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6451412617342137645}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8169992094523649587}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 270}
 --- !u!33 &7308232384004612146
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -60407,6 +60398,7 @@ MonoBehaviour:
   distanceBetweenWindows: 2
   numberOfFloors: 5
   window: {fileID: 0}
+  brokenWindow: {fileID: 0}
   inUse: 0
 --- !u!1 &6888536525415975874
 GameObject:

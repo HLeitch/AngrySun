@@ -15,6 +15,8 @@ public class GeneratorManager : MonoBehaviour
     public CameraController cameraController;
     public ShelterGenerator shelterGenerator;
 
+    public FeaturesOnTile[] tileFeaturesGenerators;
+
     public MainLight mainLight;
 
     // Start is called before the first frame update
@@ -44,13 +46,23 @@ public class GeneratorManager : MonoBehaviour
 
         yield return new WaitForFixedUpdate();
 
-        cameraController.Generate();
-
-
         Debug.Log(_terrainGenerator.TestTerrainTypeArray());
         shelterGenerator.PlaceShelter(_terrainGenerator.GetAllLocationsOfType(TerrainType.Ground));
         _sceneCracks.Initialise();
         _sceneCracks.PlaceCracks();
+
+        yield return new WaitForFixedUpdate();
+
+        foreach(FeaturesOnTile feature in tileFeaturesGenerators)
+        {
+            feature.Spawn();
+        }
+
+
+        yield return new WaitForFixedUpdate();
+
+        //cameraController.Generate(_terrainGenerator.GetAllLocationsOfType(TerrainType.Road));
+        cameraController.Generate(shelterGenerator.FindCameraTrackPositions());
         Debug.Log($"Generator Manager completed: {Time.realtimeSinceStartup}");
     }
 

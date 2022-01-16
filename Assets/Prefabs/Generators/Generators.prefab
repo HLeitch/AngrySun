@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fbbd643cb52b24fbb5db30cc27b875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 458732946
+  seed: 114789632
 --- !u!114 &7311569227719111566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,12 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af07b74e63e6cd54dba3976eb0ca2096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _generated: 0
   _buildingGenerator: {fileID: 1945613809727166086}
   _terrainGenerator: {fileID: 2934562428308803092}
   _sceneCracks: {fileID: 2188582350458684441}
   seedObject: {fileID: 1792700609}
   cameraController: {fileID: 0}
   shelterGenerator: {fileID: 1328221136}
+  tileFeaturesGenerators:
+  - {fileID: 0}
   mainLight: {fileID: 0}
 --- !u!1001 &1847000753651593750
 PrefabInstance:
@@ -134,7 +137,7 @@ PrefabInstance:
         type: 3}
       propertyPath: buildingPieces.Array.data[3]
       value: 
-      objectReference: {fileID: 1108913238956484270, guid: 7de08d839f252ce42b1fa0887df7e2d5,
+      objectReference: {fileID: 4786046662601744799, guid: cb099c2884ee5fd42bcc0be47342dfe7,
         type: 3}
     - target: {fileID: 189687839769355408, guid: 0862e64c5c8c1e64bb1e0e464e1b6417,
         type: 3}
@@ -291,9 +294,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3247718229600287131, guid: 926485236b46ad0418df58f30ed521af,
         type: 3}
+      propertyPath: shelter
+      value: 
+      objectReference: {fileID: 1874279011491061147, guid: ec79c7b3d21f27044aca8033f1746ec3,
+        type: 3}
+    - target: {fileID: 3247718229600287131, guid: 926485236b46ad0418df58f30ed521af,
+        type: 3}
+      propertyPath: maxRayDistance
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247718229600287131, guid: 926485236b46ad0418df58f30ed521af,
+        type: 3}
       propertyPath: generatorManager
       value: 
       objectReference: {fileID: 7311569227719111566}
+    - target: {fileID: 3247718229600287131, guid: 926485236b46ad0418df58f30ed521af,
+        type: 3}
+      propertyPath: cameraTrackLength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247718229600287131, guid: 926485236b46ad0418df58f30ed521af,
+        type: 3}
+      propertyPath: raycastLayerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926485236b46ad0418df58f30ed521af, type: 3}
 --- !u!4 &1328221137 stripped
@@ -378,6 +402,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5606490613625737901, guid: 26d781a99ba6cbb45bdea75273c87533,
         type: 3}
+      propertyPath: Terrain_Ground
+      value: 
+      objectReference: {fileID: 113358600041733900, guid: 383ee9e74a9d4aa488b851720026fb5b,
+        type: 3}
+    - target: {fileID: 5606490613625737901, guid: 26d781a99ba6cbb45bdea75273c87533,
+        type: 3}
       propertyPath: gridResolution
       value: 20
       objectReference: {fileID: 0}
@@ -418,6 +448,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 165293162431887071, guid: 72d3bced6aca94a429c8a79515f4981c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 602793634939402500, guid: 72d3bced6aca94a429c8a79515f4981c,
         type: 3}
       propertyPath: m_Layer
@@ -451,12 +486,12 @@ PrefabInstance:
     - target: {fileID: 6152225653068796863, guid: 72d3bced6aca94a429c8a79515f4981c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6152225653068796863, guid: 72d3bced6aca94a429c8a79515f4981c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6448687665774812272, guid: 72d3bced6aca94a429c8a79515f4981c,
         type: 3}

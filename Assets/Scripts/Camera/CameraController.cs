@@ -34,6 +34,26 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void Generate(List<Vector3> locations)
+    {
+        if (locations.Count > 0)
+        {
+            CameraOnTrack camCompPointer;
+            for (int index = 0; index < numOfCameras; index++)
+            {
+                GameObject newCam = Instantiate(cameraOnTrackObject, this.transform);
+                if (newCam.TryGetComponent<CameraOnTrack>(out camCompPointer))
+                {
+                    camCompPointer.addTrackNodes(locations.ToArray());
+                }
+            }
+        }
+        else
+        {
+            //do nothing
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

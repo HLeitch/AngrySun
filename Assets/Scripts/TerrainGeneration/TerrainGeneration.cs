@@ -12,7 +12,7 @@ public class TerrainGeneration : MonoBehaviour
     private int _transitionDistance = 2;
 
 
-    public GameObject Terrain_Flat;
+    public GameObject Terrain_Ground;
     public GameObject Terrain_Road;
     public GameObject Terrain_Road_T_Junction;
     public GameObject Terrain_Road_Cross;
@@ -154,7 +154,7 @@ public class TerrainGeneration : MonoBehaviour
     private void CreateTerrainArray()
     {
         //Find size of Terrain prefab
-        TerrainPlaneSize = Terrain_Flat.GetComponent<MeshRenderer>().bounds.size;
+        TerrainPlaneSize = Terrain_Ground.GetComponent<MeshRenderer>().bounds.size;
 
         //Set all in array to 
         _TerrainTypeArray = new TerrainType[gridResolution, gridResolution];
@@ -529,13 +529,13 @@ public class TerrainGeneration : MonoBehaviour
                 Vector3 loc = origin + new Vector3(unitSize.x * _counterX, 0, unitSize.x * _counterZ);
                 GameObject newTile;
                 //Change height based on type of terrain
-                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { newTile = Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0), this.transform); }
+                if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Ground) { newTile = Instantiate(Terrain_Ground, loc, Quaternion.Euler(0, 0, 0), this.transform); }
                 else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Road)
                 { newTile = RoadTileInstancing(_counterX, _counterZ, loc); }
                 else if (_TerrainTypeArray[_counterX, _counterZ] == TerrainType.Building) { newTile = Instantiate(Terrain_Building, loc, Quaternion.Euler(0, 0, 0), this.transform); }
                 else
                 {
-                    newTile = Instantiate(Terrain_Flat, loc, Quaternion.Euler(0, 0, 0));
+                    newTile = Instantiate(Terrain_Ground, loc, Quaternion.Euler(0, 0, 0));
                 }
                 
                 HL_TerrainTile tilecomp = newTile.GetComponent<HL_TerrainTile>();

@@ -11,15 +11,19 @@ public class CameraOnTrack : MonoBehaviour
     public CinemachineVirtualCamera cam;
     private CinemachineTrackedDolly dolly;
     public CinemachineSmoothPath track;
+    public Transform lookAtTarget;
+
     public bool activeCamera = false;
 
 
-    private List<CinemachineSmoothPath.Waypoint> _waypointList = new List<CinemachineSmoothPath.Waypoint>();
+    private List<CinemachineSmoothPath.Waypoint> _trackNodeList = new List<CinemachineSmoothPath.Waypoint>();
     // Start is called before the first frame update
     void Start()
     {
         dolly = cam.GetCinemachineComponent<CinemachineTrackedDolly>();
         dolly.m_PositionUnits = CinemachinePathBase.PositionUnits.Distance;
+        lookAtTarget.position = _trackNodeList[0].position;
+
         StartCoroutine(MoveCamera());
 
     }
@@ -33,8 +37,9 @@ public class CameraOnTrack : MonoBehaviour
 
     }
 
-    void MakeActiveCamera()
+    public void MakeActiveCamera()
     {
+
         activeCamera = true;
     }
 
@@ -47,9 +52,9 @@ public class CameraOnTrack : MonoBehaviour
     {
         CinemachineSmoothPath.Waypoint newWaypoint = new CinemachineSmoothPath.Waypoint();
         newWaypoint.position = newNodePos;
-        _waypointList.Add(newWaypoint);
+        _trackNodeList.Add(newWaypoint);
 
-        track.m_Waypoints = _waypointList.ToArray();
+        track.m_Waypoints = _trackNodeList.ToArray();
     }
     /// <summary>
     ///  Adds multiple nodes to the smoothpath the camera follows. if stdHeight is false the yvalue from the vector will be used.
@@ -59,7 +64,6 @@ public class CameraOnTrack : MonoBehaviour
     {
         if (newNodes is null)
         {
-            ///Likely there are no road tiles in level
             throw new System.ArgumentNullException(nameof(newNodes));
         }
 
@@ -69,11 +73,11 @@ public class CameraOnTrack : MonoBehaviour
             if (_bStdHeight) { _nodeEditable.y = stdHeight; }
             CinemachineSmoothPath.Waypoint newWaypoint = new CinemachineSmoothPath.Waypoint();
             newWaypoint.position = _nodeEditable;
-            _waypointList.Add(newWaypoint);
+            _trackNodeList.Add(newWaypoint);
         }
-        track.m_Waypoints = _waypointList.ToArray();
+        track.m_Waypoints = _trackNodeList.ToArray();
 
-        Debug.Log($"number of points = {_waypointList.Count}");
+        Debug.Log($"number of points = {_trackNodeList.Count}");
     }
 
     /// <summary>

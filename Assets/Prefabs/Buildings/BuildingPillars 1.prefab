@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 6260238769398232087}
   - component: {fileID: 6260238769398232072}
   - component: {fileID: 6260238769398232086}
+  - component: {fileID: -2328907900025939907}
   m_Layer: 0
   m_Name: BuildingPillars 1
   m_TagString: Untagged
@@ -240,7 +241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d004e90ad42135b4a917e6a8d3a16ef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -286,6 +287,20 @@ MonoBehaviour:
   multiLevel: 0
   _mMesh: {fileID: 0}
   _mMeshRenderer: {fileID: 6629873513472195582}
+--- !u!64 &-2328907900025939907
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494679049959334376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5535223959740019871, guid: 114d95e900451cc4ca7e44cef5b19ea0, type: 3}
 --- !u!1 &7436232533462643687
 GameObject:
   m_ObjectHideFlags: 0
